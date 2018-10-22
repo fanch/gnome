@@ -1,4 +1,4 @@
-# Depends on: dconf desktop-file-utils hicolor-icon-theme gnome-doc-utils json-glib libgphoto2 libgee libgexiv2 gtk3 libgudev libraw libsoup libxml2 librest gstreamer-plugins-base webkitgtk libgdata
+# Depends on: gtk3 libgdata libgee libgexiv2 libgphoto2 libraw meson vala webkitgtk
 
 description="A digital photo organizer designed for the GNOME desktop environment"
 url="http://www.gnome.org/"
@@ -7,16 +7,16 @@ contributors="Tnut"
 run=(intltool vala) 
 
 name=shotwell
-version=0.28.4
+version=0.30.1
 release=1
 source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
-./configure --prefix=/usr \
-			--disable-schemas-compile \
-			--disable-desktop-update \
-			--disable-icon-update 
-make
-make DESTDIR=$PKG install
+mkdir build
+cd build
+meson 	--prefix  /usr 
+ninja
+DESTDIR=$PKG ninja install
 }
+
