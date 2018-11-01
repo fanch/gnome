@@ -6,7 +6,7 @@ packager="fanch <fanch@nutyx.com>"
 contributors="Tnut, Pierre B, Jayce"
 
 name=libinput
-version=1.11.3
+version=1.12.2
 release=1
 
 source=(http://freedesktop.org/software/$name/$name-$version.tar.xz)

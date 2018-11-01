@@ -5,19 +5,18 @@
 # Depends on: xmlto libxslt polkit gobject-introspection vala
 
 name=accountsservice
-version=0.6.50
+version=0.6.54
 release=1
-
 source=(http://www.freedesktop.org/software/$name/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
-./configure --prefix=/usr \
---sysconfdir=/etc \
---localstatedir=/var  \
---disable-static \
---disable-systemd
-make
-make DESTDIR=$PKG install
+mkdir build
+cd build
+meson --prefix=/usr            	\
+      -Dsystemdsystemunitdir=no \
+      ..
+ninja
+DESTDIR=$PKG ninja install
 mkdir -p $PKG/var/{lib,run}/polkit-1
 }
